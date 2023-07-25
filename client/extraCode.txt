@@ -1,0 +1,412 @@
+     <>
+
+                        {isGrad === '' && meetings !== [] && timePassedVar === meetings.length && connection.commentMade === false ? <>
+                            <Grid item xs={12} md={6} lg={12} color="error">
+                                {/* Comment Section */}
+                                <Card spacing={2} sx={{ p: "1rem", overflowY: "auto", height: "auto" }}>
+                                    <Typography>Review</Typography>
+                                    <p>Kindly provide a comment on your connection with this graduate. (NOTE - one per user)</p>
+                                    <Stack spacing={3}>
+
+                                        <TextField
+                                            value={comment.brief !== undefined ? comment.brief : ''}
+                                            name="Brief" label="Brief" onChange={(e) => { if (e.target.value.length < 81) { setComment({ ...comment, brief: e.target.value }) } }} />
+                                        <TextField
+
+                                            multiline name="Description" label="Description" onChange={(e) => { setComment({ ...comment, description: e.target.value }) }} />
+                                        <Rating
+                                            name="simple-controlled"
+                                            value={comment.stars}
+                                            onChange={(event, newValue) => {
+                                                setComment({ ...comment, stars: newValue });
+                                            }}
+                                        />
+                                        <Button sx={{ maxHeight: '40px' }} variant="contained"
+                                            onClick={sendReview} endIcon={<SendIcon />}>
+                                            Send
+                                        </Button>
+                                        {/* <TextField
+
+                                        name="email" label="Email address" onChange={(e) => { setComment({ ...comment, description: e.target.value }) }} /> */}
+
+
+                                        {/* <h5 className='text-red-400' style={{ color: red[200] }}> {errorMessage}</h5> */}
+                                    </Stack>
+
+
+                                </Card>
+
+                            </Grid>
+                        </> : undefined}
+                    </>
+
+
+New full return statement
+
+ {connection !== undefined && connection.basket !== undefined ? <>
+
+                <Grid container spacing={3} >
+
+
+                    {connection.basket.chat === true ? <>
+
+                        <Grid item xs={12} md={10} lg={9}>
+                            <Card sx={{ padding: '0%', height: '70vh', border: "1px solid lightgray" }}>
+                                <Stack >
+                                    {/* <Box sx={{ width: '200%', overflow: "auto", height: "50vh", p: "2rem", border: '2px solid #ddeaf7 ', borderRadius: "10px" }}> */}
+                                    <Box flexDirection={'column-reverse'} sx={{ width: '100%', overflow: "auto", height: "55vh", p: "2rem", pb: "2rem", backgroundColor: "#fafafa", borderRadius: "0px" }}>
+                                        <ConnectionChat chats={connection.chats} />
+
+                                    </Box>
+                                    <div style={{ height: "0.2rem", backgroundColor: 'lightgray', borderRadius: "10px" }}></div>
+                                    <Box sx={{ width: '100%', height: "20vh", px: "1rem", pt: "1rem", backgroundColor: "#fafafa", borderRadius: "0px" }}>
+                                        {/* <ConnectionChat chat={chat} /> */}
+                                        <Stack direction={'row'} spacing={1} justifyContent={'space-between'} >
+
+                                            <Input multiline
+                                                rows={2} fullWidth value={message} onChange={(e) => { setMessage(e.target.value); validMessage(e.target.value) }} />
+
+
+                                            <Button sx={{ maxHeight: '40px' }} disabled={valid} variant="contained"
+                                                onClick={send} endIcon={<SendIcon />}>
+                                                Send
+                                            </Button>
+
+                                        </Stack>
+
+                                    </Box>
+
+                                    {/* <Typography >Major: Computer Science</Typography> */}
+                                </Stack>
+
+
+                            </Card>
+                        </Grid>
+                    </> : undefined}
+
+                    <Grid item xs={12} md={6} lg={3} color="error">
+                        <Card spacing={2} sx={{ p: "0.5rem", overflowY: "auto", height: "auto" }}>
+
+                            {connection.meetings !== undefined ?
+                                <>
+
+                                    {connection.meetings.map((meet, index) => {
+                                        return (<>
+
+                                            {/* <Button sx={{ width: "auto" }} onClick={() => {
+                                                if (meet === false) { setCurrentMeeting(index); setOpen(true) }
+                                                else {
+                                                    alert("You have already booked this meeting slot")
+                                                }
+                                            }} variant={meet === true ? "contained" : "outlined"}>Meeting {index + 1}</Button> 
+                                            
+                                            */}
+                                        </>)
+                                    })}
+                                </>
+                                : undefined}
+                            <Box sx={{ borderRadius: "10px", alignItems: "center", p: "1rem", width: "full", mb: "0.5rem", backgroundColor: connection.basket.essayReview === true ? green[200] : red[200] }}>Essay Review</Box>
+                            <Box sx={{ borderRadius: "10px", alignItems: "center", p: "1rem", width: "full", backgroundColor: connection.basket.interviewPrep === true ? green[200] : red[200] }}>Interview Prep</Box>
+
+
+
+                        </Card>
+
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={9} color="error">
+                        <Card sx={{ padding: '1rem' }}>
+                            Meetings
+                            <Stack sx={{ pt: "1rem" }} spacing={2}>
+
+                                {meetings.map(({ name, start_time }) => {
+                                    return (
+                                        <>
+
+                                            {timePassed(start_time)[0] ? <>
+                                                <Box sx={{ border: "2px solid " + green[100], p: "0.5rem", borderRadius: '5px' }}>
+                                                    <Stack direction={'row'} flex justifyContent={'space-between'}>
+                                                        <> {name} : {convertDate(start_time)} </>
+                                                        <CheckCircleOutlineIcon />
+                                                    </Stack>
+
+                                                </Box>
+                                            </> : <>
+                                                <Box sx={{ border: "2px solid " + red[100], p: "0.5rem", borderRadius: '5px' }}>
+                                                    <Stack direction={'row'} flex justifyContent={'space-between'}>
+                                                        <> {name} : {convertDate(start_time)} <Typography sx={{ color: grey[600] }}>{'(' + timePassed(start_time)[1] + ' days left)'}</Typography></>
+                                                        <AccessTimeIcon />
+                                                    </Stack>
+
+                                                </Box>
+                                            </>}
+                                        </>
+
+                                    )
+                                })}
+                            </Stack>
+                        </Card>
+                    </Grid>
+                    {connection.basket.essaySharing === true ?
+                        <Grid item xs={12} md={6} lg={12} color="error">
+                            <Card sx={{ padding: '1rem' }}>
+                                <Stack sx={{ width: "full" }} direction={'row'} spacing={2}>
+                                    <Box sx={{ width: "50vw", maxHeight: "40vh", overflowY: "scroll" }}>My Files <br />
+                                        <Stack sx={{ pt: "0.5rem" }} spacing={2}>
+                                            {isGrad === '' ? <>{connection.files.user.map((file) => {
+
+
+                                                return (
+                                                    <>
+                                                        <>
+                                                            <Box sx={{ border: "2px solid " + green[100], p: "0.5rem", borderRadius: '5px' }}>
+                                                                <Stack direction={'row'} flex justifyContent={'space-between'}>
+                                                                    <Typography sx={{ cursor: "pointer" }} onClick={() => { downloadFile(file.filename, file.caption) }}>{file.caption} </Typography>
+                                                                    <DeleteIconOutlined sx={{ cursor: "pointer" }} onClick={() => { deleteFile(file.filename) }} />
+                                                                </Stack>
+
+                                                            </Box>
+
+
+                                                        </>
+                                                    </>
+                                                )
+                                            })}</> : <>{connection.files.grad.map((file) => {
+
+
+                                                return (
+                                                    <>
+                                                        <>
+                                                            <Box sx={{ border: "2px solid " + green[100], p: "0.5rem", borderRadius: '5px' }}>
+                                                                <Stack direction={'row'} flex justifyContent={'space-between'}>
+                                                                    <Typography sx={{ cursor: "pointer" }} onClick={() => { downloadFile(file.filename, file.caption) }}>{file.caption} </Typography>
+                                                                    <DeleteIconOutlined sx={{ cursor: "pointer" }} onClick={() => { deleteFile(file.filename) }} />
+                                                                </Stack>
+
+                                                            </Box>
+
+
+                                                        </>
+                                                    </>
+                                                )
+                                            })}</>}
+
+                                        </Stack>
+                                    </Box>
+                                    <Box sx={{ width: "50vw", maxHeight: "40vh", overflowY: "scroll" }}>{isGrad === 'grad' ? "Student's" : "Graduate's"} Files <br />
+                                        <Stack sx={{ pt: "0.5rem" }} spacing={2}>
+
+                                            {isGrad === '' ? <>{connection.files.grad.map((file) => {
+
+
+                                                return (
+                                                    <>
+                                                        <>
+                                                            <Box sx={{ border: "2px solid " + green[100], p: "0.5rem", borderRadius: '5px' }}>
+                                                                <Stack direction={'row'} flex justifyContent={'space-between'}>
+                                                                    <Typography sx={{ cursor: "pointer" }} onClick={() => { downloadFile(file.filename, file.caption) }}>{file.caption} </Typography>
+                                                                    {/* <DeleteIconOutlined sx={{ cursor: "pointer" }} onClick={() => { deleteFile(file.filename) }} /> */}
+                                                                </Stack>
+
+                                                            </Box>
+
+
+                                                        </>
+                                                    </>
+                                                )
+                                            })}</> : <>{connection.files.user.map((file) => {
+
+
+                                                return (
+                                                    <>
+                                                        <>
+                                                            <Box sx={{ border: "2px solid " + green[100], p: "0.5rem", borderRadius: '5px' }}>
+                                                                <Stack direction={'row'} flex justifyContent={'space-between'}>
+                                                                    <Typography sx={{ cursor: "pointer" }} onClick={() => { downloadFile(file.filename, file.caption) }}>{file.caption} </Typography>
+                                                                    {/* <DeleteIconOutlined sx={{ cursor: "pointer" }} onClick={() => { deleteFile(file.filename) }} /> */}
+                                                                </Stack>
+
+                                                            </Box>
+
+
+                                                        </>
+                                                    </>
+                                                )
+                                            })}</>}
+                                        </Stack>
+                                    </Box>
+                                </Stack>
+                                {/* <Button onClick={() => {
+                                    navigator.clipboard.writeText("Hi bro")
+                                }}> Test system</Button> */}
+                                <br />
+                                <Button
+                                    variant="outlined"
+                                    component="label"
+                                >
+                                    Upload File
+                                    <input
+                                        type="file"
+                                        hidden
+                                        accept="application/pdf, .docx, .doc"
+                                        onChange={(e) => { uploadFile(e.target.files[0]) }}
+                                    />
+                                </Button>
+                                {/* <Button onClick={() => {
+                                    console.log(files)
+                                    let temp = files
+                                    temp.user.push({
+                                        caption: "random",
+                                        filename: "bruh"
+                                    })
+                                    console.log(temp)
+                                    setFiles(temp)
+                                }}>
+                                    Add random
+                                </Button> */}
+                            </Card>
+                        </Grid> : undefined}
+
+                    {isGrad === '' && meetings !== [] && timePassedVar === meetings.length && connection.commentMade === false ? <>
+                        <Grid item xs={12} md={6} lg={12} color="error">
+                            {/* Comment Section */}
+                            <Card spacing={2} sx={{ p: "1rem", overflowY: "auto", height: "auto" }}>
+                                <Typography>Review</Typography>
+                                <p>Kindly provide a comment on your connection with this graduate. (NOTE - one per user)</p>
+                                <Stack spacing={3}>
+
+                                    <TextField
+                                        value={comment.brief !== undefined ? comment.brief : ''}
+                                        name="Brief" label="Brief" onChange={(e) => { if (e.target.value.length < 81) { setComment({ ...comment, brief: e.target.value }) } }} />
+                                    <TextField
+
+                                        multiline name="Description" label="Description" onChange={(e) => { setComment({ ...comment, description: e.target.value }) }} />
+                                    <Rating
+                                        name="simple-controlled"
+                                        value={comment.stars}
+                                        onChange={(event, newValue) => {
+                                            setComment({ ...comment, stars: newValue });
+                                        }}
+                                    />
+                                    <Button sx={{ maxHeight: '40px' }} variant="contained"
+                                        onClick={sendReview} endIcon={<SendIcon />}>
+                                        Send
+                                    </Button>
+                                    {/* <TextField
+
+                                        name="email" label="Email address" onChange={(e) => { setComment({ ...comment, description: e.target.value }) }} /> */}
+
+
+                                    {/* <h5 className='text-red-400' style={{ color: red[200] }}> {errorMessage}</h5> */}
+                                </Stack>
+
+
+                            </Card>
+
+                        </Grid>
+                    </> : undefined}
+
+                    {/* <Grid item xs={12} md={6} lg={12}>
+                    </Grid> */}
+
+                    {/* <Grid item xs={12} md={6} lg={4}>
+    <AppCurrentSubject
+        title="Current Subject"
+        chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
+        chartData={[
+            { name: 'Series 1', data: [80, 50, 30, 40, 200, 20] },
+            { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
+            { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
+        ]}
+        chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
+    />
+</Grid> */}
+
+
+                    <Grid item xs={12} md={6} lg={12}>
+
+                        {/* <Review
+        title="Reviews"
+        list={grad.reviews === undefined ? [] : grad.reviews}
+    /> */}
+
+                    </Grid>
+
+                    {/* <Grid item xs={12} md={6} lg={4}>
+    <AppOrderTimeline
+        title="Order Timeline"
+        list={[...Array(5)].map((_, index) => ({
+            id: faker.datatype.uuid(),
+            title: [
+                '1983, orders, $4220',
+                '12 Invoices have been paid',
+                'Order #37745 from September',
+                'New order placed #XF-2356',
+                'New order placed #XF-2346',
+            ][index],
+            type: `order${index + 1}`,
+            time: faker.date.past(),
+        }))}
+    />
+</Grid>
+
+<Grid item xs={12} md={6} lg={4}>
+    <AppTrafficBySite
+        title="Traffic by Site"
+        list={[
+            {
+                name: 'FaceBook',
+                value: 323234,
+                icon: <Iconify icon={'eva:facebook-fill'} color="#1877F2" width={32} />,
+            },
+            {
+                name: 'Google',
+                value: 341212,
+                icon: <Iconify icon={'eva:google-fill'} color="#DF3E30" width={32} />,
+            },
+            {
+                name: 'Linkedin',
+                value: 411213,
+                icon: <Iconify icon={'eva:linkedin-fill'} color="#006097" width={32} />,
+            },
+            {
+                name: 'Twitter',
+                value: 443232,
+                icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} />,
+            },
+        ]}
+    />
+</Grid>
+
+<Grid item xs={12} md={6} lg={12}>
+    <AppTasks
+        title="Tasks"
+        list={[
+            { id: '1', label: 'Create FireStone Logo' },
+            { id: '2', label: 'Add SCSS and JS files if required' },
+            { id: '3', label: 'Stakeholder Meeting' },
+            { id: '4', label: 'Scoping & Estimations' },
+            { id: '5', label: 'Sprint Showcase' },
+        ]}
+    />
+</Grid> */}
+                </Grid>
+                <Dialog
+                    open={open}
+                    onClose={() => setOpen(false)}
+                    sx={{ p: '1rem' }}
+                    fullWidth
+                    maxWidth={'xl'}
+                >
+                    <DialogTitle>Set backup account</DialogTitle>
+                    <Stack direction={'row'} justifyContent={"space-between"}>
+
+                        <Box sx={{ p: '1rem' }}>
+
+                            {meetingScheduler}
+                        </Box>
+                    </Stack>
+                </Dialog>
+            </> : undefined}
+
+
+

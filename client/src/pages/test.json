@@ -1,0 +1,84 @@
+
+{
+    "_id": {
+      "$oid": "64a960055e1de68662389f96"
+    },
+    "name": "Ayra Ali",
+    "emailId": "ayra.a4889@gmail.com",
+    "password": "$2b$10$1Lm3C3fjgm6.qpjupx2L7Ozpii/d7q3gVbfCYdVhKDZumywGuuqUi",
+    "description": "I am a student at the University of Waterloo pursuing Honours Co-op Chemistry/Biochemistry while I explore technology along with my adoration for writing. I am also a TEDx speaker, the Founder at Ehsaas, a Round Square attendee, a Gulf Debates winner, a competitive innovator and a writer, and I hope to help you find further opportunities to foster growth and creativity. ",
+    "img": "ayra-ali",
+    "connections": [
+      
+    ],
+    "daysActive": [],
+    "tiers": [
+      {
+        "price": 30,
+        "currency": "dollars",
+        "description": [
+          "Provides direct access to admitted student for one hour",
+          "Clear program-specific queries, and general doubts ",
+          ""
+        ],
+        "_id": {
+          "$oid": "63ebe5755af61ed68dcb42c3"
+        }
+      },
+      {
+        "price": 80,
+        "currency": "dollars",
+        "description": [
+          "Includes everything from Tier 1",
+          "In-depth review of college essays (personal statements)",
+          "Direct access to successful college essays"
+        ],
+        "_id": {
+          "$oid": "63ebe5755af61ed68dcb42c4"
+        }
+      },
+      {
+        "price": 150,
+        "currency": "dollars",
+        "description": [
+          "Includes everything from Tier 1 and 2",
+          "Comprehensive interview preparation",
+          "Ideal for high school students who want comprehensive support"
+        ],
+        "_id": {
+          "$oid": "63ebe5755af61ed68dcb42c5"
+        }
+      }
+    ],
+    "uni": "University of Waterloo",
+    "reviews": [
+      {
+        "user": "6403acab158d4e0c8fb2c23b",
+        "username": "Aryan",
+        "stars": 4,
+        "brief": "Loved the meeting",
+        "description": "I really enjoyed this meeting, I thought she had some great expertise on the admissions process especially since she knows how to collaborate with students and to help them bring about a drastic improvement in their essays.",
+        "datePosted": "Sat Jul 8 2023 13:45:54 GMT+0400 (Gulf Standard Time)"
+        
+      }
+    ],
+   
+    "major": "Bio-Chemistry",
+    "nationality": "Indian",
+    "price": {
+      "meet": 0,
+      "essayReview": 0,
+      "interviewPrep": 0,
+      "strat": 0
+    },
+    "token": "eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNjc3OTE1NTk2LCJqdGkiOiI2NjY4OWE0My1kYTVlLTQ3NTktOThlZi1iZTJhMmVhMDVjYmEiLCJ1c2VyX3V1aWQiOiI4OGQ4YzA1My0yOTdkLTQwMmUtYmU4ZC1lYjUyYThiZDYzMDEifQ.kh0VULBm4l0CHYDOUsXntWDnr9GDMMLAKNMzoRZmFUB4UskgvpafugEHMIpgqsmyeBkmF8dfvtE4m0mim3gKSw",
+    "uni_img": "waterloo",
+    "meetingsCnt": 0,
+    "other": [
+      "umich",
+      "uoft",
+      "western",
+      "ubc"
+    ]
+  }  
+  
