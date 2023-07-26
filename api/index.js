@@ -61,7 +61,7 @@ mongoose.connect(process.env.MONGOOSE_URL, { useNewUrlParser: true, useUnifiedTo
 });
 
 // create storage engine
-const storage = new GridFsStorage({
+const storage = new GridFsStorage({ 
     url: process.env.MONGOOSE_URL,
     file: (req, file) => {
         return new Promise((resolve, reject) => {
