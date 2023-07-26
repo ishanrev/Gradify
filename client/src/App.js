@@ -14,27 +14,27 @@ import axios from 'axios';
 import axiosLink from './axiosLink';
 
 // ----------------------------------------------------------------------
-async function updateUser(change) {
-  console.log("--------change da---------")
-  console.log(change)
-  try {
-    let tempId = user._id.toString();
-    let { updated } = (await (axios.put(axiosLink + `/user/${tempId}`, change))).data;
-    setUser(updated)
 
-    console.log("successfully updated the user")
-  } catch (userUpdateError) {
-    console.log("update ueser error")
-    console.log(userUpdateError)
-  }
-}
 export default function App() {
 
   const [user, setUser] = useState({ _id: uuid() })
   const [loggedIn, setLoggedIn] = useState(undefined)
   const [stats, setStats] = useState({})
   const [isGrad, setIsGrad] = useState('')
+  async function updateUser(change) {
+    console.log("--------change da---------")
+    console.log(change)
+    try {
+      let tempId = user._id.toString();
+      let { updated } = (await (axios.put(axiosLink + `/user/${tempId}`, change))).data;
+      setUser(updated)
 
+      console.log("successfully updated the user")
+    } catch (userUpdateError) {
+      console.log("update ueser error")
+      console.log(userUpdateError)
+    }
+  }
   const getUser = async (userId) => {
     try {
       console.log('first')
@@ -91,20 +91,20 @@ export default function App() {
     return (appClosed)
   }, [])
 
-  function appClosed(){
+  function appClosed() {
     console.log("app has successfully closed")
   }
 
   async function updateStatsInDatabase() {
-    
-      try {
-        console.log("----------"+stats)
-        let res = await axios.post(axiosLink + "/stats/update", stats)
 
-      } catch (statsError) {
-        console.log("couldn't successfuly update the analytics storage")
-      }
-    
+    try {
+      console.log("----------" + stats)
+      let res = await axios.post(axiosLink + "/stats/update", stats)
+
+    } catch (statsError) {
+      console.log("couldn't successfuly update the analytics storage")
+    }
+
   }
 
   useEffect(() => {

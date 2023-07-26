@@ -24,7 +24,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DeleteIconOutlined from '@mui/icons-material/DeleteOutlined';
 import { v4 as uuid } from "uuid"
 // import { decode as base64_decode, encode as base64_encode } from 'base-64';
-// import FileSaver from 'file-saver';
+import FileSaver from 'file-saver';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -528,7 +528,7 @@ export default function ConnectionMain({ conId }) {
             let res = await axios.post(axiosLink + "/user/grad/comment/" + connection.grad, body)
             setshowCommentSection(false)
         } catch (sendReviewError) {
-            console.log * (sendReviewError)
+            console.log(sendReviewError)
         }
     }
     // useEffect(() => {

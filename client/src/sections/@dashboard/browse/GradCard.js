@@ -48,10 +48,10 @@ export default function GradCard({ grad }) {
   return (
     <Card onClick={() => { navigate('/dashboard/grad/' + _id.toString()) }} sx={{ cursor: "pointer" }}>
       <Box sx={{ pt: '100%', position: 'relative' }}>
-        {status && (
+        {true && (
           <Label
             variant="filled"
-            color={(status === 'sale' && 'error') || 'info'}
+            color={(true === 'sale' && 'error') || 'info'}
             sx={{
               zIndex: 9,
               top: 16,
@@ -60,7 +60,7 @@ export default function GradCard({ grad }) {
               textTransform: 'uppercase',
             }}
           >
-            {status}
+            {true}
           </Label>
         )}
         <StyledProductImg alt={name} src={image} />
