@@ -24,7 +24,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DeleteIconOutlined from '@mui/icons-material/DeleteOutlined';
 import { v4 as uuid } from "uuid"
 // import { decode as base64_decode, encode as base64_encode } from 'base-64';
-import FileSaver from 'file-saver';
+// import FileSaver from 'file-saver'
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -447,7 +447,7 @@ export default function ConnectionMain({ conId }) {
                 .then(response => {
 
                     console.log("trying");
-                    FileSaver.saveAs(response.data, caption);
+                    // FileSaver.saveAs(response.data, caption);
 
                 })
                 .then(() => {
