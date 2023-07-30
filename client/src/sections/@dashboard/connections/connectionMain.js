@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Card, Input, TextField, Button, Dialog, DialogTitle, InputAdornment, Rating, Collapse, IconButton } from '@mui/material';
+import { Grid, Container, Typography, Card, Input, TextField, Button, Dialog, DialogTitle, InputAdornment, Rating, Collapse, IconButton, CircularProgress } from '@mui/material';
 // components
 // import ScrollableFeed from 'react-scrollable-feed'
 
@@ -147,7 +147,7 @@ export default function ConnectionMain({ conId }) {
     const [currentMeeting, setCurrentMeeting] = useState('')
     const [open, setOpen] = useState(false)
     const [connection, setConnection] = useState({})
-    const [meetings, setMeetings] = useState([])
+    const [meetings, setMeetings] = useState(undefined)
     // const [files, setFiles] = useState({})
     const [timePassedVar, setTimePassedVar] = useState(0)
     const [comment, setComment] = useState({})
@@ -729,7 +729,12 @@ export default function ConnectionMain({ conId }) {
                                         )
                                     })}
                                 </Stack>
-                            </> : undefined}
+                            </> : <>
+                                <Stack paddingTop={'2rem'} direction={'row'} justifyContent={'center'}>
+
+                                    <CircularProgress sx={{ color: "#F9D949" }} />
+                                </Stack>
+                            </>}
                         </Card>
                     </Grid>
                     {/* {connection.basket.essaySharing === true ? */}
@@ -806,7 +811,7 @@ export default function ConnectionMain({ conId }) {
                                                 return (
                                                     <>
                                                         <>
-                                                            <Box sx={{ border: "2px solid " +'#3C486B', p: "0.5rem", borderRadius: '5px' }}>
+                                                            <Box sx={{ border: "2px solid " + '#3C486B', p: "0.5rem", borderRadius: '5px' }}>
                                                                 <Stack direction={'row'} flex justifyContent={'space-between'}>
                                                                     <Typography sx={{ cursor: "pointer" }} onClick={() => { downloadFile(file.filename, file.caption) }}>{file.caption} </Typography>
                                                                     {/* <DeleteIconOutlined sx={{ cursor: "pointer" }} onClick={() => { deleteFile(file.filename) }} /> */}
@@ -875,7 +880,7 @@ export default function ConnectionMain({ conId }) {
                                         setComment({ ...comment, stars: newValue });
                                     }}
                                 />
-                                <Button sx={{ maxHeight: '40px', backgroundColor: '#3C486B', color:'white' }} variant="contained"
+                                <Button sx={{ maxHeight: '40px', backgroundColor: '#3C486B', color: 'white' }} variant="contained"
                                     onClick={sendReview} endIcon={<SendIcon />}>
                                     Send
                                 </Button>

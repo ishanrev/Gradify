@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { NavLink as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
-import { Box, Button, Card, List, ListItemText, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, CircularProgress, List, ListItemText, Stack, Typography } from '@mui/material';
 //
 import { StyledNavItem, StyledNavItemIcon } from './styles';
 import { useContext, useEffect, useState } from 'react';
@@ -21,38 +21,46 @@ export default function ConnectionNav({ data = [], setConId, conId, ...other }) 
   }, [])
   return (
     <Card lg={4} sx={{ height: "70vh", overflowY: "scroll" }}>
-      {loggedIn ===true ? <>
+      {data === null ? <>
+        <Stack paddingTop={'2rem'} direction={'row'} justifyContent={'center'}>
 
-
-        {data.length > 0 ?
-          <>
-            <Stack spacing={2} {...other}>
-              <List sx={{ p: 1 }}>
-                {data.map((item) => (<>
-
-                  <NavItem key={item.title} item={item} setConId={setConId} currentConId={conId} />
-
-
-                </>
-                ))}
-
-              </List>
-            </Stack>
-          </>
-          : <>
-            <Stack sx={{ p: "1rem", alignItems: "center" }}>
-              <Typography> You have no connections. </Typography>
-              <br />
-              <Button variant='outlined' onClick={() => { navigate('/dashboard/browse') }}>Make Connection</Button>
-            </Stack>
-          </>}
-      </> : <>
-        <Stack sx={{ p: "1rem", alignItems: "center" }}>
-          <Typography> Please Sign In to view you rconnection</Typography>
-          <br />
-          <Button variant='outlined' sx={{ width: "auto" }} onClick={() => { navigate('/login') }}>Login</Button>
-
+          <CircularProgress sx={{ color: "#F9D949" }} />
         </Stack>
+      </> : <>
+
+        {loggedIn === true ? <>
+
+
+          {data.length > 0 ?
+            <>
+              <Stack spacing={2} {...other}>
+                <List sx={{ p: 1 }}>
+                  {data.map((item) => (<>
+
+                    <NavItem key={item.title} item={item} setConId={setConId} currentConId={conId} />
+
+
+                  </>
+                  ))}
+
+                </List>
+              </Stack>
+            </>
+            : <>
+              <Stack sx={{ p: "1rem", alignItems: "center" }}>
+                <Typography> You have no connections. </Typography>
+                <br />
+                <Button variant='outlined' onClick={() => { navigate('/dashboard/browse') }}>Make Connection</Button>
+              </Stack>
+            </>}
+        </> : <>
+          <Stack sx={{ p: "1rem", alignItems: "center" }}>
+            <Typography> Please Sign In to view you rconnection</Typography>
+            <br />
+            <Button variant='outlined' sx={{ width: "auto" }} onClick={() => { navigate('/login') }}>Login</Button>
+
+          </Stack>
+        </>}
       </>}
 
     </Card>

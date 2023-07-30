@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Card } from '@mui/material';
+import { Grid, Container, Typography, Card, CircularProgress } from '@mui/material';
 // components
 import Iconify from '../components/iconify';
 // sections
@@ -41,12 +41,7 @@ export default function ConnectionPage() {
     let navigate = useNavigate()
 
     const [conId, setConId] = useState('home')
-    const [conList, setConList] = useState([
-        // {
-        //     title: 'John Malone - Harvard University',
-        //     path: '/connection/64033c03d44571ffa8d10ba6',
-        // }
-    ])
+    const [conList, setConList] = useState(null)
     // 
     const checkForConnection = async () => {
         console.log(user.connections)
@@ -139,7 +134,10 @@ export default function ConnectionPage() {
                 <title> Connection </title>
             </Helmet>
             <Grid sx={{ px: "3rem", py: "6rem" }} container direction={'row'} spacing={3}>
-                <Grid item lg={3}><ConnectionNav data={conList} conId={conId} setConId={setConId} /></Grid>
+                <Grid item lg={3}>
+                    <ConnectionNav data={conList} conId={conId} setConId={setConId} />
+                   
+                </Grid>
                 {conId === 'home' ?
                     <Grid item lg={9}>
                         <Stack direction={'row'} justifyContent='center'>
