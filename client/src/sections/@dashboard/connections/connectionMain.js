@@ -194,6 +194,7 @@ export default function ConnectionMain({ conId }) {
                 let meetRes = await axios.get("https://api.calendly.com/scheduled_events/" + eventId,
                     {
                         headers: {
+                            // 'Content-Type': 'application/json',
                             authorization: `Bearer ${token}`
                         }
                     })
