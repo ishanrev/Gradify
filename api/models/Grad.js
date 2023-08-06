@@ -62,7 +62,8 @@ const gradSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    other: [String]
+    other: [String],
+    calendlyUsername:String
 })
 
 const grads = mongoose.model('grads', gradSchema)

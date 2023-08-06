@@ -32,7 +32,9 @@ GradCard.propTypes = {
 export default function GradCard({ grad }) {
   const { img, name, uni, nationality, _id, major } = grad;
   const [image, setImage] = useState('ayra-ali')
-  useEffect(() => {
+  let navigate = useNavigate()
+  const fetchImage = () => {
+
     let temp
     try {
       temp = require(`../../../grads/${img}.png`)
@@ -42,8 +44,14 @@ export default function GradCard({ grad }) {
       temp = require(`../../../grads/alt.jpg`)
     }
     setImage(temp)
+  }
+  useEffect(() => {
+    fetchImage()
   }, [])
-  let navigate = useNavigate()
+  useEffect(() => {
+    fetchImage()
+  }, [grad])
+
 
   return (
     <Card onClick={() => { navigate('/dashboard/grad/' + _id.toString()) }} sx={{ cursor: "pointer" }}>

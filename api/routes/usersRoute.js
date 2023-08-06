@@ -4,6 +4,7 @@ const users = require('../models/User')
 const bcrypt = require('bcrypt')
 const grads = require('../models/Grad')
 const connections = require('../models/Connection')
+const uniList = require('../../client/src/constants/unis')
 
 // ------------------------------------------------------Grads---------------------------------------------------------
 
@@ -53,7 +54,7 @@ router.post('/grad/browse', async (req, res) => {
         let x = 0
         for (let grad of gradsArr) {
 
-            let { reviews, uni, major, nationality } = grad
+            let { reviews, uni, major, nationality, other } = grad
             let overallRating;
             let sum = 0
             for (let rev of reviews) {
@@ -66,7 +67,10 @@ router.post('/grad/browse', async (req, res) => {
                 overallRating = Math.round(sum / reviews.length)
             }
             let score = 0
-            let filterArr = [overallRating.toString(), uni, nationality, major]
+            let tempOther = other.map((el) => {
+                return el
+            })
+            let filterArr = [overallRating.toString(), uni, nationality, major, ...tempOther]
             // overallRating.toString() === tags.overallRating ? score += 1 : undefined
             // uni.toString() === tags.uni ? score += 1 : undefined
             // nationality.toString() === tags.nationality ? score += 1 : undefined

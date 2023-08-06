@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 // @mui
@@ -8,6 +8,7 @@ import { grey, red } from '@mui/material/colors';
 // components
 import Iconify from '../../../components/iconify';
 import axiosLink from '../../../axiosLink'
+import { UserContext } from '../../../context';
 // ----------------------------------------------------------------------
 
 export default function SignUpForm() {
@@ -19,6 +20,7 @@ export default function SignUpForm() {
   const [error, setError] = useState(false)
 
   const [details, setDetails] = useState({})
+  const { user, setUser } = useContext(UserContext)
   const handleClick = async () => {
     // navigate('/dashboard', { replace: true });
     console.log(details)
@@ -28,8 +30,9 @@ export default function SignUpForm() {
         setErrorMessage(message)
       } else {
         setErrorMessage('')
-        const res = await axios.post(axiosLink+ '/auth/signUp', details)
+        const res = await axios.post(axiosLink + '/auth/signUp', details)
         if (res.data.success === true) {
+          setUser(res.data.user)
           navigate('/dashboard')
         } else {
           setError(error)
@@ -39,7 +42,10 @@ export default function SignUpForm() {
     }
     catch (LoginError) {
       console.log(LoginError)
-      setError(error)
+      if (LoginError.response.data.type === 'repeat') {
+        setError(true)
+        setErrorMessage("User already exists")
+      }
 
     }
   };

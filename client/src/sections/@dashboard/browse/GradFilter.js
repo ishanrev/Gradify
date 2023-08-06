@@ -19,6 +19,7 @@ import {
 import Iconify from '../../../components/iconify';
 import Scrollbar from '../../../components/scrollbar';
 import { ColorMultiPicker } from '../../../components/color-utils';
+import uniList from '../../../constants/unis';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +30,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import countryIcons from '../../general/countryList';
 import UNIVERSITIES from '../../general/uniList'
-import MAJORS from '../../general/majorList'
+// import MAJORS from '../../general/majorList'
+import { useState, useEffect } from 'react';
+
 function SelectSmall({ list, onSelect, heading }) {
   const [age, setAge] = React.useState('');
 
@@ -98,10 +101,32 @@ GradFilter.propTypes = {
 };
 
 export default function GradFilter({ openFilter, onOpenFilter, onCloseFilter, addChip }) {
+  const [unis, setUnis] = useState([])
+  const [acceptances, setAcceptances] = useState([])
+  const [majors, setMajors] = useState([])
+  const majorsJSON = require("../../../majors.json")
+  const unisJSON = require("../../../unisMain.json")
+  useEffect(() => {
+    let temp = []
+    for (let key of Object.keys(uniList)) {
+      temp.push(uniList[key])
+    }
+    setAcceptances(temp)
+    let temp2 = []
+    for (let obj of majorsJSON) {
+      temp2.push(obj.major)
+    }
+    setMajors(temp2)
+    let temp3 = []
+    for (let obj of unisJSON) {
+      temp3.push(uniList[obj.uni])
+    }
+    setUnis(temp3)
 
+  }, [])
   return (
     <>
-      <Button sx={{ backgroundColor: '#3C486B', color:'white'}} variant='outlined' disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
+      <Button sx={{ backgroundColor: '#3C486B', color: 'white' }} variant='outlined' disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
         Filter&nbsp;
       </Button>
 
@@ -147,7 +172,19 @@ export default function GradFilter({ openFilter, onOpenFilter, onCloseFilter, ad
                   <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
                 ))}
               </RadioGroup> */}
-              <SelectSmall list={UNIVERSITIES} onSelect={addChip} heading="University" />
+              <SelectSmall list={unis} onSelect={addChip} heading="University" />
+
+            </div>
+            <div>
+              <Typography variant="subtitle1" gutterBottom>
+                Acceptances
+              </Typography>
+              {/* <RadioGroup>
+                {FILTER_CATEGORY_OPTIONS.map((item) => (
+                  <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
+                ))}
+              </RadioGroup> */}
+              <SelectSmall list={acceptances} onSelect={addChip} heading="Acceptance" />
 
             </div>
 
@@ -162,7 +199,7 @@ export default function GradFilter({ openFilter, onOpenFilter, onCloseFilter, ad
                   <FormControlLabel key={item.value} value={item.value} control={<Radio />} label={item.label} />
                 ))}
               </RadioGroup> */}
-              <SelectSmall list={MAJORS} onSelect={addChip} heading="Major" />
+              <SelectSmall list={majors} onSelect={addChip} heading="Major" />
             </div>
 
             <div>

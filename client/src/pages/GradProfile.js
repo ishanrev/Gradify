@@ -95,7 +95,7 @@ export default function GradProfilePage() {
                     temp2 = require(`../unis/alt.jpg`)
                 }
                 setImage({ grad: temp, uni: temp2 })
-                setAccountNameNew(res.data.user.emailId.substring(0, res.data.user.emailId.indexOf("@")))
+                setAccountNameNew(res.data.user.calendlyUsername)
                 setGrad(res.data.user)
                 console.log(res.data.user.emailId.substring(0, res.data.user.emailId.indexOf("@")))
             } catch (getGradError) {
@@ -491,7 +491,7 @@ export default function GradProfilePage() {
                     fullWidth
                     maxWidth={'md'}
                 >
-                    <DialogTitle>Set backup account</DialogTitle>
+                    <DialogTitle>Schedule a meeting now!</DialogTitle>
                     <Stack direction={'row'} justifyContent={'space-around'} spacing={3} sx={{ p: '1rem' }}>
 
                         {meetingScheduler}

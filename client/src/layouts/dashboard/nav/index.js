@@ -63,10 +63,14 @@ export default function Nav({ openNav, onCloseNav }) {
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex', }}>
         <Stack direction={'row'}>
 
-          <Logo />
+          {/* <Logo />
           <Typography sx={{ pt: "0.5rem", pl: "0.5rem" }}>
             Gradify
-          </Typography>
+          </Typography> */}
+          <Stack width={'100%'} direction={'row'}  justifyContent={'center'} alignContent={'center'}>
+
+            <img style={{ width: '50%', height: "90%" }} alt="not working" src={require('../../../images/home-logo-long.png')} />
+          </Stack>
         </Stack>
       </Box>
       {loggedIn === true ? <>

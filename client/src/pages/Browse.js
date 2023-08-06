@@ -225,7 +225,8 @@ export default function BrowsePage() {
       }
       let res = await axios.post(axiosLink + "/user/grad/browse", body)
       console.log(res.data)
-      setGradList(res.data.grads)
+      let temp = res.data.grads
+      setGradList(temp)
     } catch (searchError) {
       console.log(searchError)
     }
