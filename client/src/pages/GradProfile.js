@@ -64,7 +64,25 @@ export default function GradProfilePage() {
             {/* <InlineWidget styles={{
                 height: '1000px'
             }} url="https://calendly.com/ishanrev1212/30min" /> */}
-            <InlineWidget styles={{ width: "60vw", height: "60vh" }} url={`https://calendly.com/${accountName}/30min`} />
+            <InlineWidget
+                styles={{ width: "60vw", height: "60vh" }}
+                url={`https://calendly.com/${accountName}/30min`}
+                prefill={{
+
+                    email: user.emailId !== undefined ? user.emailId : '',
+                    firstName: 'Jon',
+                    lastName: 'Snow',
+                    name: user.name !== undefined ? user.name : '',
+                    guests: [
+
+                    ],
+                    customAnswers: {
+
+                    },
+                    date: new Date(Date.now() + 86400000)
+
+                }}
+            />
         </>
 
     )
@@ -143,7 +161,7 @@ export default function GradProfilePage() {
     //     checkForConnection()
     // }, [])
     const totalPriceCalcualtor = () => {
-        if (grad.price !== undefined) {
+        if (grad.price !== undefined && service !== 'second') {
 
             let sum = grad.price['meet']
             for (let el of Object.keys(basket)) {
@@ -153,6 +171,8 @@ export default function GradProfilePage() {
                 }
             }
             return grad.price[service]
+        } else {
+            return 0
         }
     }
     useCalendlyEventListener({
@@ -382,7 +402,7 @@ export default function GradProfilePage() {
                                 <br />
                                 <Stack spacing={2}>
                                     <Typography>    {`Price:       ` + totalPriceCalcualtor() + ''}$ </Typography>
-                                    <Button onClick={() => { setOpen(true) }} variant={'outlined'}>Book Now</Button>
+                                    <Button disabled={(() => { return service === 'second' ? true : false })()} onClick={() => { setOpen(true) }} variant={'outlined'}>Book Now</Button>
                                 </Stack>
                             </Card>
                         </Grid>
@@ -500,7 +520,7 @@ export default function GradProfilePage() {
 
                                 {readyToPay === true && user._id !== undefined ?
                                     <>
-                                        <Stack spacing={2} maxWidth={'20vw'}>
+                                        {/* <Stack spacing={2} maxWidth={'20vw'}>
 
                                             <Typography>The payment transfer must be completed within 20 minutes of making your booking.
                                                 Meeting slots may be booked according to personal preference at any time in any required number.</Typography>
@@ -543,7 +563,16 @@ export default function GradProfilePage() {
                                                     });
                                                 }}
                                             />
-                                        </Stack>
+                                        </Stack> */}
+
+                                        <Button sx={{height:'10%'}} variant='outlined' onClick={() => {
+                                            paymentComplete()
+                                            setTimeout(() => {
+                                                navigate('/connection/home')
+                                            }, 1000)
+                                        }}>
+                                            Proceed to create Connection
+                                        </Button>
 
                                     </> : undefined
                                 }

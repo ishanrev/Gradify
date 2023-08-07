@@ -738,8 +738,8 @@ export default function ConnectionMain({ conId }) {
                             </>}
                         </Card>
                     </Grid>
-                    {/* {connection.basket.essaySharing === true ? */}
-                    {true ?
+                    {connection.basket.essaySharing === true ?
+                    
                         <Grid item xs={12} md={6} lg={12} color="error">
                             <Card sx={{ padding: '1rem' }}>
                                 <Stack sx={{ width: "full" }} direction={'row'} spacing={2}>
@@ -860,8 +860,8 @@ export default function ConnectionMain({ conId }) {
                         </Grid> : undefined}
 
                     {/* {isGrad === '' && meetings !== [] && timePassedVar === meetings.length && connection.commentMade === false ? <>                        <Grid item xs={12} md={6} lg={12} color="error"> */}
-                    {isGrad === '' && meetings !== [] && timePassedVar >= 0 && showCommentSection === true ? <>                        <Grid item xs={12} md={6} lg={12} color="error">
-                        {/* {isGrad === '' && meetings !== [] && connection.commentMade === false ? <>                        <Grid item xs={12} md={6} lg={12} color="error"> */}
+                    {/* {isGrad === '' && meetings !== [] && timePassedVar >= 0 && showCommentSection === true ? <>                        <Grid item xs={12} md={6} lg={12} color="error"> */}
+                        {isGrad === '' && meetings !== [] && connection.commentMade === false ? <>                        <Grid item xs={12} md={6} lg={12} color="error">
                         {/* Comment Section */}
                         <Card spacing={2} sx={{ p: "1rem", overflowY: "auto", height: "auto" }}>
                             <Typography>Review</Typography>
