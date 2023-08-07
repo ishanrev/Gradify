@@ -13,18 +13,18 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const socket = io.connect(SERVER);
-console.log("main socket is")
-console.log(socket)
+// console.log("main socket is")
+// console.log(socket)
 
 function socketConfiguration() {
 
     socket.on("connection", () => {
-        // console.log('socket io connection  succesfullle established baby leess go')
+        // // console.log('socket io connection  succesfullle established baby leess go')
     })
 
 
     // setSocket(socket)
-    console.log(socket)
+    // console.log(socket)
 }
 socketConfiguration()
 

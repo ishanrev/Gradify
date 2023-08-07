@@ -23,7 +23,7 @@ export default function SignUpForm() {
   const { user, setUser } = useContext(UserContext)
   const handleClick = async () => {
     // navigate('/dashboard', { replace: true });
-    console.log(details)
+    // console.log(details)
     try {
       let { chk, message } = checkPassword()
       if (chk === true) {

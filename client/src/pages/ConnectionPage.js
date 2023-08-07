@@ -44,7 +44,7 @@ export default function ConnectionPage() {
     const [conList, setConList] = useState(null)
     // 
     const checkForConnection = async () => {
-        console.log(user.connections)
+        // // console.log(user.connections)
         try {
             let cons = []
             for (let cId of user.connections) {
@@ -67,13 +67,13 @@ export default function ConnectionPage() {
             }
             setConList(cons)
         } catch (conError) {
-            console.log(conError)
+            // // console.log(conError)
         }
     }
     useEffect(() => {
 
 
-        console.log(user.connections)
+        // // console.log(user.connections)
         if (user.connections !== undefined) {
 
             checkForConnection()
@@ -84,14 +84,14 @@ export default function ConnectionPage() {
         checkForConnection()
     }, [loggedIn])
     // useEffect(() => {
-    //     console.log(id)
+    //     // // console.log(id)
     //     async function fetchGrad() {
     //         try {
     //             let res = await axios.get(axiosLink + "/user/grad/" + id)
-    //             console.log(res.data)
+    //             // // console.log(res.data)
     //             setGrad(res.data.user)
     //         } catch (getGradError) {
-    //             console.log(getGradError)
+    //             // // console.log(getGradError)
     //             navigate("/404")
     //         }
     //     }

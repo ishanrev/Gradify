@@ -22,26 +22,26 @@ export default function App() {
   const [stats, setStats] = useState({})
   const [isGrad, setIsGrad] = useState('')
   async function updateUser(change) {
-    console.log("--------change da---------")
-    console.log(change)
+    // console.log("--------change da---------")
+    // console.log(change)
     try {
       let tempId = user._id.toString();
       let { updated } = (await (axios.put(axiosLink + `/user/${tempId}`, change))).data;
       setUser(updated)
 
-      console.log("successfully updated the user")
+      // console.log("successfully updated the user")
     } catch (userUpdateError) {
-      console.log("update ueser error")
-      console.log(userUpdateError)
+      // console.log("update ueser error")
+      // console.log(userUpdateError)
     }
   }
   const getUser = async (userId) => {
     try {
-      console.log('first')
+      // console.log('first')
       const res = await axios.get(axiosLink + '/user/user/' + userId)
       setIsGrad('')
-      console.log(res)
-      console.log('second')
+      // console.log(res)
+      // console.log('second')
 
       setUser(res.data.user)
       setLoggedIn(true)
@@ -53,13 +53,13 @@ export default function App() {
       try {
         const gradRes = await axios.get(axiosLink + '/user/grad/' + userId)
         setUser(gradRes.data.user)
-        console.log("grad success")
+        // console.log("grad success")
         setLoggedIn(true)
         setIsGrad('grad')
         socket.emit("save userId", { userId: gradRes.data.user._id.toString() })
 
       } catch (error) {
-        console.log("grad failure")
+        // console.log("grad failure")
 
         setLoggedIn(false)
       }
@@ -69,18 +69,18 @@ export default function App() {
   }
 
   const updateStats = (key, value) => {
-    console.log("+++++++++++++++++++++++++++=")
-    console.log(key, value)
+    // console.log("+++++++++++++++++++++++++++=")
+    // console.log(key, value)
     let temp = stats
     temp[key] = value
     setStats(temp)
-    console.log(temp)
+    // console.log(temp)
     updateStatsInDatabase()
   }
 
   useEffect(() => {
     let userId = localStorage.getItem("userId")
-    console.log("/*/*/*/*/*/*/*", userId)
+    // console.log("/*/*/*/*/*/*/*", userId)
     if (userId === null) {
       setLoggedIn(false)
     } else {
@@ -92,17 +92,17 @@ export default function App() {
   }, [])
 
   function appClosed() {
-    console.log("app has successfully closed")
+    // console.log("app has successfully closed")
   }
 
   async function updateStatsInDatabase() {
 
     try {
-      console.log("----------" + stats)
+      // console.log("----------" + stats)
       let res = await axios.post(axiosLink + "/stats/update", stats)
 
     } catch (statsError) {
-      console.log("couldn't successfuly update the analytics storage")
+      // console.log("couldn't successfuly update the analytics storage")
     }
 
   }
@@ -111,13 +111,13 @@ export default function App() {
     async function getStats() {
 
       try {
-        console.log("initating the stats connection")
+        // console.log("initating the stats connection")
         let res = await axios.get(axiosLink + "/stats/")
-        console.log(res.data.stats)
+        // console.log(res.data.stats)
         setStats(res.data.stats)
 
       } catch (error) {
-        console.log("couldnt get the analytics")
+        // console.log("couldnt get the analytics")
       }
     }
     getStats()

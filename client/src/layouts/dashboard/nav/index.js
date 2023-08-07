@@ -67,14 +67,14 @@ export default function Nav({ openNav, onCloseNav }) {
           <Typography sx={{ pt: "0.5rem", pl: "0.5rem" }}>
             Gradify
           </Typography> */}
-          <Stack width={'100%'} direction={'row'}  justifyContent={'center'} alignContent={'center'}>
+          <Stack width={'100%'} direction={'row'} justifyContent={'center'} alignContent={'center'}>
 
-            <img style={{ width: '50%', height: "90%" }} alt="not working" src={require('../../../images/home-logo-long.png')} />
+            <img style={{ width: '50%', height: "90%", borderRadius: "100px" }} alt="not working" src={require('../../../images/home-logo-long.png')} />
           </Stack>
         </Stack>
       </Box>
       {loggedIn === true ? <>
-        <Box sx={{ mb: 5, mx: 2.5 }}>
+        <Box sx={{ mb: 5, mx: 2.5, overflowX: 'clip' }}>
           <Link underline="none">
             <StyledAccount>
               <Avatar src={account.photoURL} alt="photoURL" />

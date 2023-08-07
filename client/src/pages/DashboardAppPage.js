@@ -27,7 +27,7 @@ export default function DashboardAppPage() {
   const { user } = useContext(UserContext)
   const theme = useTheme();
   useEffect(() => {
-    console.log(user)
+    // console.log(user)
 
 
   }, [])

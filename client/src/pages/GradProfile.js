@@ -89,12 +89,12 @@ export default function GradProfilePage() {
     const [image, setImage] = useState('ayra-ali')
 
     useEffect(() => {
-        console.log(id)
+        // console.log(id)
         let gId = ''
         async function fetchGrad() {
             try {
                 let res = await axios.get(axiosLink + "/user/grad/" + id)
-                console.log(res.data.user)
+                // console.log(res.data.user)
                 // gId = res.data.user._id.toString()
                 let temp
                 try {
@@ -115,9 +115,9 @@ export default function GradProfilePage() {
                 setImage({ grad: temp, uni: temp2 })
                 setAccountNameNew(res.data.user.calendlyUsername)
                 setGrad(res.data.user)
-                console.log(res.data.user.emailId.substring(0, res.data.user.emailId.indexOf("@")))
+                // console.log(res.data.user.emailId.substring(0, res.data.user.emailId.indexOf("@")))
             } catch (getGradError) {
-                console.log(getGradError)
+                // console.log(getGradError)
                 navigate("/404")
             }
         }
@@ -136,11 +136,11 @@ export default function GradProfilePage() {
 
         try {
             let res = await axios.post(axiosLink + "/connection/isConnection", { grad: grad._id.toString(), user: user._id.toString() })
-            console.log(res)
+            // console.log(res)
             if (res.data.success === true) {
-                console.log("modifying basket to accomodate w=for whats already there")
+                // console.log("modifying basket to accomodate w=for whats already there")
                 let tempBasket = res.data.connection.basket
-                console.log(tempBasket)
+                // console.log(tempBasket)
                 let newBasket = { meet: true }
                 if (tempBasket !== undefined) {
                     for (let key of Object.keys(tempBasket)) {
@@ -154,34 +154,43 @@ export default function GradProfilePage() {
                 // setConnection(res.data.setConnection)
             }
         } catch (conError) {
-            console.log(conError)
+            // console.log(conError)
         }
     }
     // useEffect(() => {
     //     checkForConnection()
     // }, [])
     const totalPriceCalcualtor = () => {
-        if (grad.price !== undefined && service !== 'second') {
+        // if (grad.price !== undefined && service !== 'second') {
 
-            let sum = grad.price['meet']
-            for (let el of Object.keys(basket)) {
-                if (basket[el] === true) {
+        //     let sum = grad.price['meet']
+        //     for (let el of Object.keys(basket)) {
+        //         if (basket[el] === true) {
 
-                    sum += grad.price[el]
-                }
-            }
-            return grad.price[service]
-        } else {
+        //             sum += grad.price[el]
+        //         }
+        //     }
+        //     return service !== 'essayCuration' ? grad.price[service] : 2
+        // } else {
+        //     return 0
+        // }
+        if (service === 'second') {
             return 0
         }
+        else if (service === 'essaySharing') {
+            return 0
+        } else {
+            return grad.price[service]
+        }
+
     }
     useCalendlyEventListener({
 
         onEventScheduled: async (e) => {
             setReadyToPay(true)
             setTimeout(() => { setReadyToPay(false) }, 300000)
-            console.log("event has been scheduled")
-            console.log(e)
+            // console.log("event has been scheduled")
+            // console.log(e)
             await meetingBooked(e)
 
 
@@ -190,7 +199,7 @@ export default function GradProfilePage() {
     const meetingBooked = async (e) => {
         let uri = e.data.payload.event.uri
         let evId = uri.substring(uri.lastIndexOf('/') + 1)
-        console.log("eventId babbyyy - new", evId)
+        // console.log("eventId babbyyy - new", evId)
         setEventId(evId)
         try {
             if (grad._id !== undefined) {
@@ -201,13 +210,13 @@ export default function GradProfilePage() {
                 })
             }
         } catch (createPaymentError) {
-            console.log(createPaymentError)
+            // console.log(createPaymentError)
         }
     }
     const paymentComplete = async () => {
 
         try {
-            console.log("Just before initiation", eventId)
+            // console.log("Just before initiation", eventId)
             let res = await axios.post(axiosLink + "/connection/paymentComplete", {
                 eventId,
                 basket,
@@ -220,7 +229,7 @@ export default function GradProfilePage() {
             })
             // let tempUser = { ...user, connections: [...user.connections, res.data.connection._id.toString()] }
             // updateUser({ connections: [...temp, res.data.connection._id.toString()] })
-            console.log(basket)
+            // console.log(basket)
             let temp = stats.serviceFrequency;
             for (let key of Object.keys(basket)) {
                 temp[key] = temp[key] !== undefined ? basket[key] === true ? temp[key] + 1 : temp[key] : 0
@@ -230,10 +239,10 @@ export default function GradProfilePage() {
                 setUser(res.data.user)
 
             }
-            console.log("res.sucesssssssss baby")
+            // console.log("res.sucesssssssss baby")
         } catch (paymentCompleteError) {
-            console.log("^^^^^^^^^ we have a payment COmpleteError boys")
-            console.log(paymentCompleteError)
+            // console.log("^^^^^^^^^ we have a payment COmpleteError boys")
+            // console.log(paymentCompleteError)
         }
     }
     const basketLabels = {
@@ -380,7 +389,7 @@ export default function GradProfilePage() {
                                                             // if (el !== 'meet') {
                                                             // let temp = { ...basket }
                                                             // temp[el] = e.target.value
-                                                            console.log(e.target.value)
+                                                            // console.log(e.target.value)
                                                             setService(e.target.value)
 
 
@@ -549,12 +558,12 @@ export default function GradProfilePage() {
                                                         const name = details.payer.name.given_name;
                                                         let amount = totalPriceCalcualtor()
                                                         let temp = stats.basketValues
-                                                        // console.log(temp)
+                                                        // // console.log(temp)
                                                         let temp2 = stats.averageBasketValue
                                                         temp2 = ((temp2 * temp.length) + amount) / (temp.length + 1)
                                                         temp.push(amount)
                                                         updateStats('basketValues', temp)
-                                                        // console.log(temp2)
+                                                        // // console.log(temp2)
                                                         updateStats('averageBasketValue', temp2)
 
 
@@ -565,7 +574,7 @@ export default function GradProfilePage() {
                                             />
                                         </Stack> */}
 
-                                        <Button sx={{height:'10%'}} variant='outlined' onClick={() => {
+                                        <Button sx={{ height: '10%' }} variant='outlined' onClick={() => {
                                             paymentComplete()
                                             setTimeout(() => {
                                                 navigate('/connection/home')

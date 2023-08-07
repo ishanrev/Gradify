@@ -15,11 +15,11 @@ function HomePage() {
     const [mailOptions, setMailOptions] = useState({ from: 'structoclient@gmail.com' })
     const sendMail = async () => {
         // try {
-        //     //console.log(mailOptions)
+        //     //// console.log(mailOptions)
         //     let res = await axios.post(axiosLink + '/mail', mailOptions)
-        //     //console.log(res)
+        //     //// console.log(res)
         // } catch (EmailError) {
-        //     //console.log(EmailError)                  
+        //     //// console.log(EmailError)                  
         // }
         // message.success('Thank you for contacting us') 
     }

@@ -97,7 +97,7 @@ const footers = [
 
 function PricingContent({ tiers }) {
   React.useEffect(() => {
-    console.log(tiers)
+    // console.log(tiers)
     let temp;
     temp = tiers !== undefined ? JSON.parse(JSON.stringify(tiers)) : []
     for (let x = 0; x < temp.length; x++) {
@@ -112,7 +112,7 @@ function PricingContent({ tiers }) {
       temp[x] = newT
     }
     tiers = JSON.parse(JSON.stringify(temp))
-    console.log(tiers)
+    // console.log(tiers)
 
   }, [])
 

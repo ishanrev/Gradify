@@ -33,7 +33,7 @@ function ConnectionChat({ chats = [] }) {
     const { user } = useContext(UserContext)
 
     useEffect(() => {
-        console.log('typing chat from where I want to type my friend')
+        // console.log('typing chat from where I want to type my friend')
     }, [])
     const sideRender = (sender) => {
         if (sender === user._id.toString()) {
@@ -160,7 +160,7 @@ export default function ConnectionMain({ conId }) {
 
 
     useEffect(() => {
-        console.log(connection)
+        // console.log(connection)
         socket.on("update connection", ({ }) => {
             getConnection()
         })
@@ -170,17 +170,17 @@ export default function ConnectionMain({ conId }) {
     }, [])
     useEffect(() => {
         getConnection()
-        console.log('yo')
-        console.log('yo')
-        console.log('yo')
+        // console.log('yo')
+        // console.log('yo')
+        // console.log('yo')
     }, [])
     useEffect(() => {
-        console.log("recognizing change")
+        // console.log("recognizing change")
         getConnection()
-        console.log()
+        // console.log()
     }, [conId])
     const getMeetings = async (gradId, meetings) => {
-        console.log("new list of updated meetings", meetings, gradId)
+        // console.log("new list of updated meetings", meetings, gradId)
         let tempOpen = []
         try {
             let res = await axios.get(axiosLink + '/user/grad/' + gradId)
@@ -190,7 +190,7 @@ export default function ConnectionMain({ conId }) {
             for (let meet of meetings) {
                 let { eventId, service } = meet
                 // let eventId = meet
-                console.log(eventId)
+                // console.log(eventId)
                 let meetRes = await axios.get("https://api.calendly.com/scheduled_events/" + eventId,
                     {
                         headers: {
@@ -198,9 +198,9 @@ export default function ConnectionMain({ conId }) {
                             authorization: `Bearer ${token}`
                         }
                     })
-                console.log("resource", meetRes)
+                // console.log("resource", meetRes)
                 const { name, start_time, location } = meetRes.data.resource
-                // console.log("resource", meetRes.data.resource)
+                // // console.log("resource", meetRes.data.resource)
                 // let d = new Date()
                 // tempMeetData.push({
                 //     name: "lol",
@@ -217,22 +217,22 @@ export default function ConnectionMain({ conId }) {
             }
 
             // setCollapseOpen(tempOpen)
-            console.log('final broski tempMeetData', tempMeetData)
+            // console.log('final broski tempMeetData', tempMeetData)
             setMeetings(tempMeetData)
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     }
 
 
     const getConnection = async () => {
-        console.log('going to get a new connection yaay')
+        // console.log('going to get a new connection yaay')
         try {
             let res = await axios.get(axiosLink + '/connection/' + conId)
             if (res.data.connection !== undefined & res.data.connection !== null) {
-                console.log(res.data.connection)
+                // console.log(res.data.connection)
                 let temp = res.data.connection
-                console.log("going to get meetings now")
+                // console.log("going to get meetings now")
                 // setFiles(temp.files)
                 setGradId(res.data.connection.grad)
                 setMeetingsArr(res.data.connection.meetings)
@@ -243,19 +243,19 @@ export default function ConnectionMain({ conId }) {
                 // getFiles(res.data.connection.files)
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
 
     }
     useEffect(() => {
-        console.log("updating the static variables", [gradId, meetingsArr])
+        // console.log("updating the static variables", [gradId, meetingsArr])
         getMeetings(gradId, meetingsArr)
     }, [meetingsArr])
     // useCalendlyEventListener({
 
     //     onEventScheduled: (e) => {
-    //         console.log("event has been scheduled")
-    //         console.log(Object.keys(e.data))
+    //         // console.log("event has been scheduled")
+    //         // console.log(Object.keys(e.data))
     //         setTimeout(() => {
     //             meetingBooked()
     //         }, 3000)
@@ -282,7 +282,7 @@ export default function ConnectionMain({ conId }) {
             }
 
         } catch (messageError) {
-            console.log(messageError)
+            // console.log(messageError)
         }
     }
     const [message, setMessage] = useState('')
@@ -320,7 +320,7 @@ export default function ConnectionMain({ conId }) {
         try {
             let res = await axios.post(axiosLink + '/connection/chat/' + connection._id.toString(), newMessage)
             if (res.data.success === true) {
-                console.log('updating connection')
+                // console.log('updating connection')
                 setConnection(res.data.connection)
                 let toId
                 if (user._id.toString() === connection.user) {
@@ -331,7 +331,7 @@ export default function ConnectionMain({ conId }) {
                 socket.emit("message sent", { toId })
             }
         } catch (messageError) {
-            console.log(messageError)
+            // console.log(messageError)
         }
         setMessage('')
         setValid(true);
@@ -364,7 +364,7 @@ export default function ConnectionMain({ conId }) {
         let s = ''
         // const myDate = new Date();
         // let diff = myDate.getTimezoneOffset();
-        // console.log(typeof(diff))
+        // // console.log(typeof(diff))
         let strDate = new Date(str)
         // var newDate = strDate.toLocaleString("en-US", { timeZone: "" })
         let arr = strDate.toString().split(' ')
@@ -375,7 +375,7 @@ export default function ConnectionMain({ conId }) {
         try {
             let strDate = new Date(str)
             var current = new Date()
-            console.log(strDate, current)
+            // console.log(strDate, current)
             var Difference_In_Time = strDate.getTime() - current.getTime();
 
             // To calculate the no. of days between two dates
@@ -384,10 +384,10 @@ export default function ConnectionMain({ conId }) {
             //     let temp = timePassedVar
             //     setTimePassedVar(temp + 1)
             // }
-            console.log([current > strDate, days])
+            // console.log([current > strDate, days])
             return [current > strDate, Math.abs(days)]
         } catch (dateError) {
-            console.log(dateError)
+            // console.log(dateError)
             return [null, 0]
         }
 
@@ -397,20 +397,20 @@ export default function ConnectionMain({ conId }) {
     // })
 
     // useEffect(() => {
-    //     console.log("use Effect meeting log", meetings)
-    //     console.log(connection)
+    //     // console.log("use Effect meeting log", meetings)
+    //     // console.log(connection)
     // }, [connection])
 
     const uploadFile = async (file) => {
         try {
             let formData = new FormData();
-            console.log(Object.keys(file))
+            // console.log(Object.keys(file))
             formData.append('caption', file.name);
             formData.append('file', file);
 
             let res = await axios.post(axiosLink + "/fileUpload/", formData)
-            console.log('timberrrrrrrrrrr')
-            console.log(res.data)
+            // console.log('timberrrrrrrrrrr')
+            // console.log(res.data)
 
 
             if (res.data.success === true) {
@@ -429,12 +429,12 @@ export default function ConnectionMain({ conId }) {
                 alert(res.data.message)
             }
         } catch (addFileError) {
-            console.log(addFileError)
+            // console.log(addFileError)
         }
     }
 
     // useEffect(() => {
-    //     console.log("atleast its registering a change in the files")
+    //     // console.log("atleast its registering a change in the files")
     // }, [files])
 
     const downloadFile = async (filename, caption) => {
@@ -447,16 +447,16 @@ export default function ConnectionMain({ conId }) {
             })
                 .then(response => {
 
-                    console.log("trying");
+                    // console.log("trying");
                     // FileSaver.saveAs(response.data, caption);
 
                 })
                 .then(() => {
 
-                    console.log("Completed");
+                    // console.log("Completed");
                 });
 
-            // console.log(res)
+            // // console.log(res)
             // // const encodedString = Buffer.from(res.data).toString('base64');
             // // let encoded = base64_encode(res.data);
 
@@ -478,7 +478,7 @@ export default function ConnectionMain({ conId }) {
 
             // navigate("http://localhost:3001/api/fileUpload/image" + filename)
         } catch (displayDocumentError) {
-            console.log(displayDocumentError)
+            // console.log(displayDocumentError)
         }
     }
     const deleteFile = async (filename) => {
@@ -486,32 +486,32 @@ export default function ConnectionMain({ conId }) {
             await axios.delete(axiosLink + "/fileUpload/file/del/" + filename)
                 .then(async response => {
 
-                    console.log("trying");
+                    // console.log("trying");
                     try {
                         let tempCon = connection
 
                         tempCon.files.user = tempCon.files.user.filter((obj) => {
-                            // console.log(filename !== fName)
+                            // // console.log(filename !== fName)
                             return obj.filename !== filename
                         })
                         tempCon.files.grad = tempCon.files.grad.filter((obj) => {
-                            // console.log(filename !== fName)
+                            // // console.log(filename !== fName)
                             return obj.filename !== filename
                         })
-                        console.log(tempCon)
+                        // console.log(tempCon)
                         let updateRes = await axios.put(axiosLink + "/connection/" + conId, { files: tempCon.files })
 
                         setConnection(updateRes.data.updated)
 
                     } catch (updateError) {
-                        console.log(updateError)
+                        // console.log(updateError)
                     }
                 })
 
 
 
         } catch (deleteFileError) {
-            console.log(deleteFileError)
+            // console.log(deleteFileError)
         }
     }
     const sendReview = async () => {
@@ -525,15 +525,15 @@ export default function ConnectionMain({ conId }) {
                 }
             }
             let body = { comment: tempComment, conId: connection._id.toString() }
-            console.log(body)
+            // console.log(body)
             let res = await axios.post(axiosLink + "/user/grad/comment/" + connection.grad, body)
             setshowCommentSection(false)
         } catch (sendReviewError) {
-            console.log(sendReviewError)
+            // console.log(sendReviewError)
         }
     }
     // useEffect(() => {
-    //     console.log("------------------------------Meetings has changed")
+    //     // console.log("------------------------------Meetings has changed")
 
 
     // }, [collapseOpen])
@@ -611,7 +611,7 @@ export default function ConnectionMain({ conId }) {
                                 <Stack sx={{ pt: "1rem" }} spacing={2}>
 
                                     {meetings.map(({ name, start_time, join_url, service }, index) => {
-                                        console.log(join_url)
+                                        // console.log(join_url)
                                         return (
                                             <>
 
@@ -635,7 +635,7 @@ export default function ConnectionMain({ conId }) {
                                                                                 return val !== index
                                                                             })
                                                                         }
-                                                                        console.log(tempOpen)
+                                                                        // console.log(tempOpen)
                                                                         setCollapseOpen(tempOpen)
                                                                     }}
                                                                 >
@@ -683,7 +683,7 @@ export default function ConnectionMain({ conId }) {
                                                                                     return val !== index
                                                                                 })
                                                                             }
-                                                                            console.log(tempOpen)
+                                                                            // console.log(tempOpen)
                                                                             setCollapseOpen(tempOpen)
                                                                         }}
                                                                     >
@@ -845,13 +845,13 @@ export default function ConnectionMain({ conId }) {
                                     />
                                 </Button>
                                 {/* <Button onClick={() => {
-                                    console.log(files)
+                                    // console.log(files)
                                     let temp = files
                                     temp.user.push({
                                         caption: "random",
                                         filename: "bruh"
                                     })
-                                    console.log(temp)
+                                    // console.log(temp)
                                     setFiles(temp)
                                 }}>
                                     Add random

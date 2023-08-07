@@ -28,9 +28,9 @@ export default function LoginForm() {
   const handleClick = async () => {
     // navigate('/dashboard', { replace: true });
     try {
-      console.log('first')
+      // console.log('first')
       const res = await axios.post(axiosLink + '/auth/login' + isGrad, { emailId: mail, password })
-      console.log('second')
+      // console.log('second')
       if (res.data.loggedIn === true) {
         setUser(res.data.user)
         socket.emit("save userId", { userId: res.data.user._id.toString() })
@@ -44,14 +44,14 @@ export default function LoginForm() {
         setLoggedIn(true)
         navigate('/dashboard')
       } else {
-        console.log('third')
+        // console.log('third')
         setError(true)
       }
     }
     catch (LoginError) {
-      console.log('fourth')
-      console.log(Object.keys(LoginError.response.data))
-      console.log(LoginError.response.data)
+      // console.log('fourth')
+      // console.log(Object.keys(LoginError.response.data))
+      // console.log(LoginError.response.data)
       setError(true)
 
     }
@@ -66,14 +66,20 @@ export default function LoginForm() {
       <Stack spacing={3}>
         <TextField
           error={error}
-          name="email" label="Email address" onChange={(e) => { setMail(e.target.value); console.log(e.target.value) }} />
+          name="email" label="Email address" onChange={(e) => {
+            setMail(e.target.value);
+            // console.log(e.target.value)
+          }} />
 
         <TextField
           error={error}
           name="password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          onChange={(e) => { setPassword(e.target.value); console.log("bro password bro") }}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            //  console.log("bro password bro") 
+          }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">

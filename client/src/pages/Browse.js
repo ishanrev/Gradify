@@ -175,7 +175,7 @@ export default function BrowsePage() {
   ]
   const [gradList, setGradList] = useState(GRADS)
   useEffect(() => {
-    console.log(GRADS)
+    // console.log(GRADS)
   }, [])
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -190,8 +190,8 @@ export default function BrowsePage() {
   ]);
 
   function addChip(tag) {
-    console.log(chipData)
-    console.log(stats.keywords)
+    // console.log(chipData)
+    // console.log(stats.keywords)
     let temp = stats.keywords
     temp[tag] = temp[tag] === undefined ? 1 : temp[tag] + 1
     updateStats("keywords", temp)
@@ -208,13 +208,13 @@ export default function BrowsePage() {
         key: chipData.length,
         label: tag
       }]
-      console.log(tempChipData)
+      // console.log(tempChipData)
       setChipData(tempChipData)
     }
 
   }
   const search = async () => {
-    console.log("trying to search man")
+    // console.log("trying to search man")
     try {
       let tags = []
       for (let { label } of chipData) {
@@ -224,11 +224,11 @@ export default function BrowsePage() {
         tags
       }
       let res = await axios.post(axiosLink + "/user/grad/browse", body)
-      console.log(res.data)
+      // console.log(res.data)
       let temp = res.data.grads
       setGradList(temp)
     } catch (searchError) {
-      console.log(searchError)
+      // console.log(searchError)
     }
   }
   useEffect(() => {
